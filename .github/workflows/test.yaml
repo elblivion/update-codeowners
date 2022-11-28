@@ -13,7 +13,11 @@ jobs:
       - name: Find catalog files
         shell: bash
         run: |
-          grep -lir ^apiVersion..backstage.io
+          files=$(grep -lir ^apiVersion..backstage.io)
+          if [ $? -gt 0 ]; then 
+            echo "No catalog files found"
+            exit 1
+          fi
       # - uses: actions/setup-node@v3
       #   with:
       #     node-version: 16
