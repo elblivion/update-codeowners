@@ -10,15 +10,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - run: npm ci
-      - name: Hello world action step
-        id: hello
-        uses: ./
-        with:
-          who-to-greet: 'Mona the Octocat'
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+      - name: Find catalog files
+        shell: bash
+        run: |
+          grep -lir ^apiVersion..backstage.io
+      # - uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 16
+      # - run: npm ci
+      # - name: Hello world action step
+      #   id: hello
+      #   uses: ./
+      #   with:
+      #     who-to-greet: 'Mona the Octocat'
+      # # Use the output from the `hello` step
+      # - name: Get the output time
+      #   run: echo "The time was ${{ steps.hello.outputs.time }}"
